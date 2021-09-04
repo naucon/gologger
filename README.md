@@ -17,16 +17,16 @@ To implement another logger is straight forward. Write your own adapter that imp
 
 ```go
 type Logger interface {
-	Error(msg string)
-	Errorf(format string, v ...interface{})
-	ErrorErr(err error)
-	Warn(msg string)
-	Warnf(format string, v ...interface{})
-	WarnErr(err error)
-	Info(msg string)
-	Infof(format string, v ...interface{})
-	Debug(msg string)
-	Debugf(format string, v ...interface{})
+  Error(msg string)
+  Errorf(format string, v ...interface{})
+  ErrorErr(err error)
+  Warn(msg string)
+  Warnf(format string, v ...interface{})
+  WarnErr(err error)
+  Info(msg string)
+  Infof(format string, v ...interface{})
+  Debug(msg string)
+  Debugf(format string, v ...interface{})
 }
 ```
 
@@ -72,18 +72,17 @@ Finally, you can decouple the logger implementation by using the `Logger` interf
 
 ```go
 func doSomething(l logger.Logger) {
-	err := errors.New("some error")
-
+  err := errors.New("some error")
   l.Error("a meaningful std message")
   l.Errorf("a meaningful std message: %v", err)
   l.ErrorErr(err)
-	l.Warn("a meaningful std message")
-	l.Warnf("a meaningful std message: %v", err)
-	l.WarnErr(err)
-	l.Info("a meaningful std message")
-	l.Infof("a meaningful std message: %v", err)
-	l.Debug("a meaningful std message")
-	l.Debugf("a meaningful std message: %v", err)
+  l.Warn("a meaningful std message")
+  l.Warnf("a meaningful std message: %v", err)
+  l.WarnErr(err)
+  l.Info("a meaningful std message")
+  l.Infof("a meaningful std message: %v", err)
+  l.Debug("a meaningful std message")
+  l.Debugf("a meaningful std message: %v", err)
 }
 ```
 
@@ -92,7 +91,7 @@ func doSomething(l logger.Logger) {
 The package comes with a `loggerWrapper` to wrap another adapter.
 
 ```go
-	z := zerolog.New(os.Stdout)
+  z := zerolog.New(os.Stdout)
   l := zlog.NewAdapter(&z)
   w := logger.NewWrapper(l)
   w.Info("a meaningful std message")

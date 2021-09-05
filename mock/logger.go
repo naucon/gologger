@@ -4,50 +4,50 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type loggerMock struct {
+type LoggerMock struct {
 	mock.Mock
 }
 
-func NewLoggerMock() *loggerMock {
-	return &loggerMock{}
+func NewLoggerMock() *LoggerMock {
+	return &LoggerMock{}
 }
 
-func (m *loggerMock) Error(msg string) {
+func (m *LoggerMock) Error(msg string) {
 	m.Called(msg)
 }
 
-func (m *loggerMock) Errorf(format string, v ...interface{}) {
+func (m *LoggerMock) Errorf(format string, v ...interface{}) {
 	m.Called(format, v)
 }
 
-func (m *loggerMock) ErrorErr(err error) {
+func (m *LoggerMock) ErrorErr(err error) {
 	m.Called(err)
 }
 
-func (m *loggerMock) Warn(msg string) {
+func (m *LoggerMock) Warn(msg string) {
 	m.Called(msg)
 }
 
-func (m *loggerMock) Warnf(format string, v ...interface{}) {
+func (m *LoggerMock) Warnf(format string, v ...interface{}) {
 	m.Called(format, v)
 }
 
-func (m *loggerMock) WarnErr(err error) {
+func (m *LoggerMock) WarnErr(err error) {
 	m.Called(err)
 }
 
-func (m *loggerMock) Info(msg string) {
+func (m *LoggerMock) Info(msg string) {
 	m.Called(msg)
 }
 
-func (m *loggerMock) Infof(format string, v ...interface{}) {
+func (m *LoggerMock) Infof(format string, v ...interface{}) {
 	m.Called(format, v)
 }
 
-func (m *loggerMock) Debug(msg string) {
+func (m *LoggerMock) Debug(msg string) {
 	m.Called(msg)
 }
 
-func (m *loggerMock) Debugf(format string, v ...interface{}) {
+func (m *LoggerMock) Debugf(format string, v ...interface{}) {
 	m.Called(format, v)
 }

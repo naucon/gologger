@@ -18,15 +18,23 @@ To implement another logger is straight forward. Write your own adapter that imp
 ```go
 type Logger interface {
   Error(msg string)
+  ErrorWithFields(fields map[string]interface{}, msg string)
   Errorf(format string, v ...interface{})
+  ErrorfWithFields(fields map[string]interface{}, format string, v ...interface{})
   ErrorErr(err error)
   Warn(msg string)
+  WarnWithFields(fields map[string]interface{}, msg string)
   Warnf(format string, v ...interface{})
+  WarnfWithFields(fields map[string]interface{}, format string, v ...interface{})
   WarnErr(err error)
   Info(msg string)
+  InfoWithFields(fields map[string]interface{}, msg string)
   Infof(format string, v ...interface{})
+  InfofWithFields(fields map[string]interface{}, format string, v ...interface{})
   Debug(msg string)
+  DebugWithFields(fields map[string]interface{}, msg string)
   Debugf(format string, v ...interface{})
+  DebugfWithFields(fields map[string]interface{}, format string, v ...interface{})
 }
 ```
 
@@ -73,16 +81,28 @@ Finally, you can decouple the logger implementation by using the `Logger` interf
 ```go
 func doSomething(l logger.Logger) {
   err := errors.New("some error")
+  fields := map[string]interface{}{
+    "key": "value",
+  }
+
   l.Error("a meaningful std message")
+  l.ErrorWithFields(fields, "a meaningful std message")
   l.Errorf("a meaningful std message: %v", err)
+  l.ErrorfWithFields(fields, "a meaningful std message: %v", err)
   l.ErrorErr(err)
   l.Warn("a meaningful std message")
+  l.WarnWithFields(fields, "a meaningful std message")
   l.Warnf("a meaningful std message: %v", err)
+  l.WarnfWithFields(fields, "a meaningful std message: %v", err)
   l.WarnErr(err)
   l.Info("a meaningful std message")
+  l.InfoWithFields(fields, "a meaningful std message")
   l.Infof("a meaningful std message: %v", err)
+  l.InfofWithFields(fields, "a meaningful std message: %v", err)
   l.Debug("a meaningful std message")
+  l.DebugWithFields(fields, "a meaningful std message")
   l.Debugf("a meaningful std message: %v", err)
+  l.DebugfWithFields(fields, "a meaningful std message: %v", err)
 }
 ```
 

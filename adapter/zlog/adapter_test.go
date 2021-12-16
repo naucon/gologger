@@ -28,6 +28,19 @@ func TestZerologAdapter_Error(t *testing.T) {
 	})
 }
 
+func TestZerologAdapter_ErrorWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_ErrorWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "error message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.ErrorWithFields(expectedFields, expectedMsg)
+
+		assert.Equal(t, "{\"level\":\"error\",\"key\":\"value\",\"message\":\"error message\"}\n", out.String())
+	})
+}
+
 func TestZerologAdapter_Errorf(t *testing.T) {
 	t.Run("TestZerologAdapter_Errorf_ShouldLog", func(t *testing.T) {
 		expectedMsg := "error message: %v"
@@ -35,6 +48,19 @@ func TestZerologAdapter_Errorf(t *testing.T) {
 		adapter.Errorf(expectedMsg, errors.New("some error"))
 
 		assert.Equal(t, "{\"level\":\"error\",\"message\":\"error message: some error\"}\n", out.String())
+	})
+}
+
+func TestZerologAdapter_ErrorfWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_ErrorfWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "error message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.ErrorfWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Equal(t, "{\"level\":\"error\",\"key\":\"value\",\"message\":\"error message: some error\"}\n", out.String())
 	})
 }
 
@@ -70,6 +96,19 @@ func TestZerologAdapter_Warn(t *testing.T) {
 	})
 }
 
+func TestZerologAdapter_WarnWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_WarnWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "warning message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.WarnWithFields(expectedFields, expectedMsg)
+
+		assert.Equal(t, "{\"level\":\"warn\",\"key\":\"value\",\"message\":\"warning message\"}\n", out.String())
+	})
+}
+
 func TestZerologAdapter_Warnf(t *testing.T) {
 	t.Run("TestZerologAdapter_Warnf_ShouldLog", func(t *testing.T) {
 		expectedMsg := "warning message: %v"
@@ -77,6 +116,19 @@ func TestZerologAdapter_Warnf(t *testing.T) {
 		adapter.Warnf(expectedMsg, errors.New("some error"))
 
 		assert.Equal(t, "{\"level\":\"warn\",\"message\":\"warning message: some error\"}\n", out.String())
+	})
+}
+
+func TestZerologAdapter_WarnfWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_WarnfWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "warning message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.WarnfWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Equal(t, "{\"level\":\"warn\",\"key\":\"value\",\"message\":\"warning message: some error\"}\n", out.String())
 	})
 }
 
@@ -102,6 +154,19 @@ func TestZerologAdapter_Info(t *testing.T) {
 	})
 }
 
+func TestZerologAdapter_InfoWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_InfoWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "info message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.InfoWithFields(expectedFields, expectedMsg)
+
+		assert.Equal(t, "{\"level\":\"info\",\"key\":\"value\",\"message\":\"info message\"}\n", out.String())
+	})
+}
+
 func TestZerologAdapter_Infof(t *testing.T) {
 	t.Run("TestZerologAdapter_Infof_ShouldLog", func(t *testing.T) {
 		expectedMsg := "info message: %v"
@@ -109,6 +174,19 @@ func TestZerologAdapter_Infof(t *testing.T) {
 		adapter.Infof(expectedMsg, errors.New("some error"))
 
 		assert.Equal(t, "{\"level\":\"info\",\"message\":\"info message: some error\"}\n", out.String())
+	})
+}
+
+func TestZerologAdapter_InfofWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_InfofWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "info message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.InfofWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Equal(t, "{\"level\":\"info\",\"key\":\"value\",\"message\":\"info message: some error\"}\n", out.String())
 	})
 }
 
@@ -122,6 +200,19 @@ func TestZerologAdapter_Debug(t *testing.T) {
 	})
 }
 
+func TestZerologAdapter_DebugWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_DebugWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "debug message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.DebugWithFields(expectedFields, expectedMsg)
+
+		assert.Equal(t, "{\"level\":\"debug\",\"key\":\"value\",\"message\":\"debug message\"}\n", out.String())
+	})
+}
+
 func TestZerologAdapter_Debugf(t *testing.T) {
 	t.Run("TestZerologAdapter_Debugf_ShouldLog", func(t *testing.T) {
 		expectedMsg := "debug message: %v"
@@ -129,6 +220,19 @@ func TestZerologAdapter_Debugf(t *testing.T) {
 		adapter.Debugf(expectedMsg, errors.New("some error"))
 
 		assert.Equal(t, "{\"level\":\"debug\",\"message\":\"debug message: some error\"}\n", out.String())
+	})
+}
+
+func TestZerologAdapter_DebugfWithFields(t *testing.T) {
+	t.Run("TestZerologAdapter_DebugfWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "debug message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.DebugfWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Equal(t, "{\"level\":\"debug\",\"key\":\"value\",\"message\":\"debug message: some error\"}\n", out.String())
 	})
 }
 

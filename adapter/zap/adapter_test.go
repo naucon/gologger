@@ -28,6 +28,20 @@ func TestStdLogAdapter_Error(t *testing.T) {
 	})
 }
 
+func TestStdLogAdapter_ErrorWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_ErrorWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "error message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.ErrorWithFields(expectedFields, expectedMsg)
+
+		assert.Contains(t, out.String(), `"msg":"error message"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
+	})
+}
+
 func TestStdLogAdapter_Errorf(t *testing.T) {
 	t.Run("TestStdLogAdapter_Errorf_ShouldLog", func(t *testing.T) {
 		expectedMsg := "error message: %v"
@@ -35,6 +49,20 @@ func TestStdLogAdapter_Errorf(t *testing.T) {
 		adapter.Errorf(expectedMsg, errors.New("some error"))
 
 		assert.Contains(t, out.String(), `"msg":"error message: some error"`)
+	})
+}
+
+func TestStdLogAdapter_ErrorfWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_ErrorfWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "error message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.ErrorfWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Contains(t, out.String(), `"msg":"error message: some error"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
 	})
 }
 
@@ -68,6 +96,20 @@ func TestStdLogAdapter_Warn(t *testing.T) {
 	})
 }
 
+func TestStdLogAdapter_WarnWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_WarnWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "warning message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.WarnWithFields(expectedFields, expectedMsg)
+
+		assert.Contains(t, out.String(), `"msg":"warning message"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
+	})
+}
+
 func TestStdLogAdapter_Warnf(t *testing.T) {
 	t.Run("TestStdLogAdapter_Warnf_ShouldLog", func(t *testing.T) {
 		expectedMsg := "warning message: %v"
@@ -75,6 +117,20 @@ func TestStdLogAdapter_Warnf(t *testing.T) {
 		adapter.Warnf(expectedMsg, errors.New("some error"))
 
 		assert.Contains(t, out.String(), `"msg":"warning message: some error"`)
+	})
+}
+
+func TestStdLogAdapter_WarnfWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_WarnfWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "warning message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.WarnfWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Contains(t, out.String(), `"msg":"warning message: some error"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
 	})
 }
 
@@ -99,6 +155,20 @@ func TestStdLogAdapter_Info(t *testing.T) {
 	})
 }
 
+func TestStdLogAdapter_InfoWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_InfoWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "info message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.InfoWithFields(expectedFields, expectedMsg)
+
+		assert.Contains(t, out.String(), `"msg":"info message"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
+	})
+}
+
 func TestStdLogAdapter_Infof(t *testing.T) {
 	t.Run("TestStdLogAdapter_Infof_ShouldLog", func(t *testing.T) {
 		expectedMsg := "info message: %v"
@@ -106,6 +176,20 @@ func TestStdLogAdapter_Infof(t *testing.T) {
 		adapter.Infof(expectedMsg, errors.New("some error"))
 
 		assert.Contains(t, out.String(), `"msg":"info message: some error"`)
+	})
+}
+
+func TestStdLogAdapter_InfofWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_InfofWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "info message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.InfofWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Contains(t, out.String(), `"msg":"info message: some error"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
 	})
 }
 
@@ -119,6 +203,20 @@ func TestStdLogAdapter_Debug(t *testing.T) {
 	})
 }
 
+func TestStdLogAdapter_DebugWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_DebugWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "debug message"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.DebugWithFields(expectedFields, expectedMsg)
+
+		assert.Contains(t, out.String(), `"msg":"debug message"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
+	})
+}
+
 func TestStdLogAdapter_Debugf(t *testing.T) {
 	t.Run("TestStdLogAdapter_Debugf_ShouldLog", func(t *testing.T) {
 		expectedMsg := "debug message: %v"
@@ -126,6 +224,20 @@ func TestStdLogAdapter_Debugf(t *testing.T) {
 		adapter.Debugf(expectedMsg, errors.New("some error"))
 
 		assert.Contains(t, out.String(), `"msg":"debug message: some error"`)
+	})
+}
+
+func TestStdLogAdapter_DebugfWithFields(t *testing.T) {
+	t.Run("TestStdLogAdapter_DebugfWithFields_ShouldLog", func(t *testing.T) {
+		expectedMsg := "debug message: %v"
+		expectedFields := map[string]interface{}{
+			"key": "value",
+		}
+		adapter, out := newAdapter()
+		adapter.DebugfWithFields(expectedFields, expectedMsg, errors.New("some error"))
+
+		assert.Contains(t, out.String(), `"msg":"debug message: some error"`)
+		assert.Contains(t, out.String(), `"key":"value"`)
 	})
 }
 
